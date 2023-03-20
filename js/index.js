@@ -5,7 +5,6 @@ const init = () => {
     const dropdownButtons = document.querySelectorAll('.dropdown-toggle')
     const dropdownMenus = document.querySelectorAll('.dropdown-menu')
     const closedropdownMenuButtons = document.querySelectorAll('.close-dropdown-menu')
-    const dropdownMenusInputs = document.querySelectorAll('.dropdown-menu [type=search]')
 
     const hideDropdownMenus = () => {
         dropdownButtons.forEach(dropdownButton => {
