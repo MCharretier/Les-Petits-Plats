@@ -28,4 +28,28 @@ const getAllUstensils = () => {
     return ustensils
 }
 
-export { getAllIngredients, getAllAppliances, getAllUstensils }
+let filters = {
+    ingredients: {
+        type: 'ingredients',
+        container: document.querySelector('.ingredients .dropdown-menu-list'),
+        input: document.querySelector('#search-ingredients'),
+        all: getAllIngredients(),
+        active: []
+    },
+    appliances: {
+        type: 'appliances',
+        container: document.querySelector('.appliances .dropdown-menu-list'),
+        input: document.querySelector('#search-appliances'),
+        all: getAllAppliances(),
+        active: []
+    },
+    ustensils: {
+        type: 'ustensils',
+        container: document.querySelector('.ustensils .dropdown-menu-list'),
+        input: document.querySelector('#search-ustensils'),
+        all: getAllUstensils(),
+        active: []
+    }
+}
+
+export { filters }
