@@ -1,6 +1,6 @@
 import { recipes } from '../data/recipes.js'
 import { filters } from './getter.js'
-import { setRecipes } from './setter.js'
+import { displayRecipes } from './recipes.js'
 import { displayFilters, updateFilterList } from './filters.js'
 
 const init = () => {
@@ -40,7 +40,7 @@ const init = () => {
         displayFilters( filter.type, filter.all )
     } )
 
-    setRecipes(recipes)
+    displayRecipes(recipes)
 }
 
 init()

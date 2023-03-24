@@ -1,4 +1,11 @@
-const  setRecipes = (recipes) => {
+import { recipes } from "../data/recipes.js"
+import { filters } from "./getter.js"
+
+const  displayRecipes = (recipes) => {
+
+    const container = document.querySelector('.recipes')
+
+    container.innerHTML = ''
 
     recipes.forEach( recipe => {
 
@@ -84,7 +91,7 @@ const  setRecipes = (recipes) => {
 
             const strong = Object.assign(
                 document.createElement('strong'), { 
-                    innerHTML: `${ingredient.ingredient} ${ingredient?.quantity ? ' :' : ''}`
+                    innerHTML: `${ingredient.ingredient} ${ingredient?.quantity ? ': ' : ''}`
                 }
             )
 
@@ -104,8 +111,35 @@ const  setRecipes = (recipes) => {
         content.appendChild(bottom)
         card.appendChild(content)
 
-        document.querySelector('.recipes').appendChild(card)
+        container.appendChild(card)
     } )
 }
 
-export { setRecipes }
+const updateRecipeList = () => {
+
+    const match = recipes.filter( recipe => {
+
+        let valid = true
+        
+        valid = filters.ingredients.active.every( ingredient => 
+            recipe.ingredients.some( item => item.ingredient === ingredient ) )
+
+        if ( !valid ) return false
+
+        valid = filters.appliances.active.every( appliance => recipe.appliance === appliance )
+
+        if ( !valid ) return false
+
+        valid = filters.ustensils.active.every( ustensil => 
+            recipe.ustensils.includes( ustensil ) )
+
+        if ( !valid ) return false
+
+        return true
+    } )
+    
+    displayRecipes(match)
+}
+
+
+export { displayRecipes, updateRecipeList }

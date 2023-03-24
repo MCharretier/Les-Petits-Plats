@@ -1,4 +1,5 @@
 import { filters } from './getter.js'
+import { updateRecipeList } from './recipes.js'
 
 const displayFilters = (type, items) => {
 
@@ -52,6 +53,7 @@ const selectFilter = (filter) => {
         .appendChild(img)
 
     updateFilterList(type)
+    updateRecipeList()
 }
 
 const closeTag = (tag, type, value) => { 
@@ -62,6 +64,7 @@ const closeTag = (tag, type, value) => {
     tag.remove()
 
     updateFilterList(type)
+    updateRecipeList()
 }
 
 const updateFilterList = (type) => {
