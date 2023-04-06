@@ -34,6 +34,7 @@ let filters = {
         container: document.querySelector('.ingredients .dropdown-menu-list'),
         input: document.querySelector('#search-ingredients'),
         all: getAllIngredients(),
+        displayed: [],
         active: []
     },
     appliances: {
@@ -41,6 +42,7 @@ let filters = {
         container: document.querySelector('.appliances .dropdown-menu-list'),
         input: document.querySelector('#search-appliances'),
         all: getAllAppliances(),
+        displayed: [],
         active: []
     },
     ustensils: {
@@ -48,6 +50,7 @@ let filters = {
         container: document.querySelector('.ustensils .dropdown-menu-list'),
         input: document.querySelector('#search-ustensils'),
         all: getAllUstensils(),
+        displayed: [],
         active: []
     }
 }

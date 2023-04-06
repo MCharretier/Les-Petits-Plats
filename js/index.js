@@ -1,7 +1,6 @@
-import { recipes } from '../data/recipes.js'
 import { filters } from './getter.js'
-import { displayRecipes } from './recipes.js'
-import { displayFilters, updateFilterList } from './filters.js'
+import { updateRecipeList } from './recipes.js'
+import { updateFilterLists } from './filters.js'
 
 const init = () => {
 
@@ -34,13 +33,15 @@ const init = () => {
     } )
 
     Object.values(filters).forEach( filter => {
+
         filter.input.addEventListener( 'input', () => {
-            updateFilterList( filter.type )
+            updateFilterLists()
         } )
-        displayFilters( filter.type, filter.all )
+
+        updateFilterLists()
     } )
 
-    displayRecipes(recipes)
+    updateRecipeList()
 }
 
 init()

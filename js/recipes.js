@@ -139,7 +139,8 @@ const updateRecipeList = () => {
     } )
     
     displayRecipes(match)
+    return match
 }
 
 
-export { displayRecipes, updateRecipeList }
+export { updateRecipeList }

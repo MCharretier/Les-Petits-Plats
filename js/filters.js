@@ -1,23 +1,26 @@
 import { filters } from './getter.js'
 import { updateRecipeList } from './recipes.js'
 
-const displayFilters = (type, items) => {
+const displayFilters = () => {
 
-    filters[type].container.innerHTML = ''
+    Object.values(filters).forEach( filter => {
 
-    items.forEach( item => {
+        filter.container.innerHTML = ''
 
-        const li = Object.assign(
-            document.createElement('li'), { 
-                className: 'filter',
-                innerHTML: item,
-            },
-        )
+        filter.displayed.forEach( item => {
 
-        li.setAttribute( 'data-type', type )
-        li.addEventListener( 'click', () => selectFilter(li) )
-
-        filters[type].container.appendChild(li)   
+            const li = Object.assign(
+                document.createElement('li'), { 
+                    className: 'filter',
+                    innerHTML: item,
+                }
+            )
+    
+            li.setAttribute( 'data-type', filter.type )
+            li.addEventListener( 'click', () => selectFilter(li) )
+    
+            filter.container.appendChild(li) 
+        } )
     } )
 }
 
@@ -52,8 +55,7 @@ const selectFilter = (filter) => {
         .appendChild(button)
         .appendChild(img)
 
-    updateFilterList(type)
-    updateRecipeList()
+    updateFilterLists()
 }
 
 const closeTag = (tag, type, value) => { 
@@ -63,18 +65,41 @@ const closeTag = (tag, type, value) => {
 
     tag.remove()
 
-    updateFilterList(type)
-    updateRecipeList()
+    updateFilterLists()
 }
 
-const updateFilterList = (type) => {
+const updateFilterLists = () => {
+
+    const recipes = updateRecipeList()
+
+    Object.values(filters).forEach( filter => {
+        filter.displayed = []
+    } )
+
+    recipes.forEach( recipe => {
+
+        recipe.ingredients.forEach( item => {
+            if ( !filters.ingredients.displayed.includes(item.ingredient) ) filters.ingredients.displayed.push(item.ingredient)
+        } )
     
-    const value = filters[type].input.value.toLowerCase().trim()
+        if ( !filters.appliances.displayed.includes(recipe.appliance) ) filters.appliances.displayed.push(recipe.appliance)
+    
+        recipe.ustensils.forEach( ustensil => {
+            if ( !filters.ustensils.displayed.includes(ustensil) ) filters.ustensils.displayed.push(ustensil)
+        } )
+    } )
 
-    const match = filters[type].all
-        .filter( filter => !filters[type].active.includes(filter) && filter.toLowerCase().includes(value) )
+    Object.values(filters).forEach( filter => {
 
-    displayFilters(type, match)
+        const value = filter.input.value
+            .toLowerCase()
+            .trim()
+
+        filter.displayed = filter.displayed
+            .filter( item => !filter.active.includes(item) && item.toLowerCase().includes(value) )
+    } )
+
+    displayFilters()
 }
 
-export { displayFilters, updateFilterList }
+export { displayFilters, updateFilterLists }
