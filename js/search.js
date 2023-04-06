@@ -1,43 +1,45 @@
 import { recipes } from "../data/recipes.js"
 
-const search = {
+var search = {
     input: document.querySelector('#search'),
     minChar: 3
-}
+};
 
-const getRecipesBySearch = () => {
+function getRecipesBySearch() {
 
-    let matchRecipes = []
-    
-    const value = search.input.value
+    var matchRecipes = [];
+
+    var value = search.input.value
         .toLowerCase()
-        .trim()
+        .trim();
 
     if (value.length >= search.minChar) {
 
-        recipes.forEach( recipe => {
+        for (var i = 0; i < recipes.length; i++) {
+
+            var recipe = recipes[i];
 
             if ( recipe.name.toLowerCase().includes(value) ) {
-                matchRecipes.push(recipe)
+                matchRecipes.push(recipe);
             }
             else if ( recipe.description.toLowerCase().includes(value) ) {
-                matchRecipes.push(recipe)
+                matchRecipes.push(recipe);
             }
             else {
-                recipe.ingredients.some( ingredient => {
+                for (var j = 0; j < recipe.ingredients.length; j++) {
+
+                    var ingredient = recipe.ingredients[j];
+
                     if ( ingredient.ingredient.toLowerCase().includes(value) ) {
-                        matchRecipes.push(recipe)
-                        return true
+                        matchRecipes.push(recipe);
+                        break;
                     }
-                    return false
-                } )
+                }
             }
-        } )
-
-        return matchRecipes
+        }
+        return matchRecipes;
     }
-
-    return recipes
+    return recipes;
 }
 
 export { search, getRecipesBySearch }
