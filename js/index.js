@@ -1,4 +1,5 @@
 import { filters } from './getter.js'
+import { search } from './search.js'
 import { updateRecipeList } from './recipes.js'
 import { updateFilterLists } from './filters.js'
 
@@ -30,6 +31,11 @@ const init = () => {
         closedropdownMenuButton.addEventListener('click', () => {
             hideDropdownMenus()
         } )
+    } )
+
+    search.input.addEventListener( 'input', () => {
+        updateRecipeList()
+        updateFilterLists()
     } )
 
     Object.values(filters).forEach( filter => {

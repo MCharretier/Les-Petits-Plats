@@ -1,5 +1,5 @@
-import { recipes } from "../data/recipes.js"
 import { filters } from "./getter.js"
+import { getRecipesBySearch } from "./search.js"
 
 const  displayRecipes = (recipes) => {
 
@@ -116,6 +116,8 @@ const  displayRecipes = (recipes) => {
 }
 
 const updateRecipeList = () => {
+
+    const recipes = getRecipesBySearch()
 
     const match = recipes.filter( recipe => {
 
