@@ -7,34 +7,42 @@ const search = {
 
 const getRecipesBySearch = () => {
 
-    let matchRecipes = []
-    
+    let matchRecipes = new Set()
+
     const value = search.input.value
         .toLowerCase()
         .trim()
 
     if (value.length >= search.minChar) {
 
+        const keyWords = value.split(' ')
+
         recipes.forEach( recipe => {
 
-            if ( recipe.name.toLowerCase().includes(value) ) {
-                matchRecipes.push(recipe)
-            }
-            else if ( recipe.description.toLowerCase().includes(value) ) {
-                matchRecipes.push(recipe)
-            }
-            else {
-                recipe.ingredients.some( ingredient => {
-                    if ( ingredient.ingredient.toLowerCase().includes(value) ) {
-                        matchRecipes.push(recipe)
-                        return true
-                    }
-                    return false
-                } )
-            }
-        } )
+            keyWords.some( keyWord => {
 
-        return matchRecipes
+                if ( recipe.name.toLowerCase().includes(keyWord) ) {
+                    matchRecipes.add(recipe)
+                    return true
+                } 
+                else if ( recipe.description.toLowerCase().includes(keyWord) ) {
+                    matchRecipes.add(recipe)
+                    return true
+                } 
+                else {
+                    return recipe.ingredients.some( ingredient => {
+
+                        if ( ingredient.ingredient.toLowerCase().includes(keyWord) ) {
+                            matchRecipes.add(recipe)
+                            return true
+                        }
+                        return false
+                    })
+                }
+            })
+        })
+
+        return [...matchRecipes]
     }
 
     return recipes
