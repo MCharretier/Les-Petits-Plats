@@ -113,6 +113,17 @@ const  displayRecipes = (recipes) => {
 
         container.appendChild(card)
     } )
+
+    if (!recipes.length) {
+        container.appendChild(
+            Object.assign(
+                document.createElement('p'), {
+                    innerHTML: 'Aucune recette ne correspond à votre recherche.',
+                    className: 'no-result'
+                }
+            )
+        )
+    }
 }
 
 const updateRecipeList = () => {
