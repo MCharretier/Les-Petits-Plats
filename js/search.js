@@ -15,30 +15,42 @@ function getRecipesBySearch() {
 
     if (value.length >= search.minChar) {
 
-        for (var i = 0; i < recipes.length; i++) {
+        var keyWords = value.split(' ');
 
-            var recipe = recipes[i];
+        recipes.forEach( function(recipe) {
 
-            if ( recipe.name.toLowerCase().includes(value) ) {
-                matchRecipes.push(recipe);
-            }
-            else if ( recipe.description.toLowerCase().includes(value) ) {
-                matchRecipes.push(recipe);
-            }
-            else {
-                for (var j = 0; j < recipe.ingredients.length; j++) {
+            var found = false;
 
-                    var ingredient = recipe.ingredients[j];
+            keyWords.some( function(keyWord) {
 
-                    if ( ingredient.ingredient.toLowerCase().includes(value) ) {
-                        matchRecipes.push(recipe);
-                        break;
-                    }
+                if (recipe.name.toLowerCase().includes(keyWord)) {
+                    found = true;
+                    return true;
+                } 
+                else if (recipe.description.toLowerCase().includes(keyWord)) {
+                    found = true;
+                    return true;
+                } 
+                else {
+                    return recipe.ingredients.some( function(ingredient) {
+
+                        if (ingredient.ingredient.toLowerCase().includes(keyWord)) {
+                            found = true;
+                            return true;
+                        }
+                        return false;
+                    });
                 }
+            });
+
+            if (found) {
+                matchRecipes.push(recipe);
             }
-        }
+        });
+
         return matchRecipes;
     }
+
     return recipes;
 }
 
