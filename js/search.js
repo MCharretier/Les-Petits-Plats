@@ -17,41 +17,44 @@ function getRecipesBySearch() {
 
         var keyWords = value.split(' ');
 
-        recipes.forEach( function(recipe) {
+        for (var i = 0; i < recipes.length; i++) {
 
+            var recipe = recipes[i];
             var found = false;
 
-            keyWords.some( function(keyWord) {
+            for (var j = 0; j < keyWords.length; j++) {
+            
+                var keyWord = keyWords[j];
 
                 if (recipe.name.toLowerCase().includes(keyWord)) {
                     found = true;
-                    return true;
+                    break;
                 } 
                 else if (recipe.description.toLowerCase().includes(keyWord)) {
                     found = true;
-                    return true;
+                    break;
                 } 
                 else {
-                    return recipe.ingredients.some( function(ingredient) {
+
+                    for (var k = 0; k < recipe.ingredients.length; k++) {
+
+                        var ingredient = recipe.ingredients[k];
 
                         if (ingredient.ingredient.toLowerCase().includes(keyWord)) {
                             found = true;
-                            return true;
+                            break;
                         }
-                        return false;
-                    });
+                    }
                 }
-            });
-
+            }
             if (found) {
                 matchRecipes.push(recipe);
             }
-        });
-
+        }
         return matchRecipes;
     }
-
     return recipes;
 }
+
 
 export { search, getRecipesBySearch }
