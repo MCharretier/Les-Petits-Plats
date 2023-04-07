@@ -21,6 +21,17 @@ const displayFilters = () => {
     
             filter.container.appendChild(li) 
         } )
+    
+    if (!filter.displayed.length) {
+        filter.container.appendChild(
+            Object.assign(
+                document.createElement('li'), {
+                    innerHTML: 'Aucun résultat.',
+                    className: 'filter no-result'
+                }
+            )
+        )
+    }
     } )
 }
 
