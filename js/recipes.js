@@ -118,7 +118,7 @@ const  displayRecipes = (recipes) => {
         container.appendChild(
             Object.assign(
                 document.createElement('p'), {
-                    innerHTML: 'Aucune recette ne correspond à votre recherche.',
+                    innerHTML: 'Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.',
                     className: 'no-result'
                 }
             )
