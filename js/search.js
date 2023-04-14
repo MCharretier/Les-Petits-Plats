@@ -20,40 +20,38 @@ function getRecipesBySearch() {
         for (var i = 0; i < recipes.length; i++) {
 
             var recipe = recipes[i];
-            var found = false;
+            var valid = true;
 
             for (var j = 0; j < keyWords.length; j++) {
             
                 var keyWord = keyWords[j];
 
-                if (recipe.name.toLowerCase().includes(keyWord)) {
-                    found = true;
-                    break;
-                } 
-                else if (recipe.description.toLowerCase().includes(keyWord)) {
-                    found = true;
-                    break;
-                } 
-                else {
+                if (!recipe.name.toLowerCase().includes(keyWord) && !recipe.description.toLowerCase().includes(keyWord)) {
+
+                    var hasIngredient = false;
 
                     for (var k = 0; k < recipe.ingredients.length; k++) {
 
                         var ingredient = recipe.ingredients[k];
 
                         if (ingredient.ingredient.toLowerCase().includes(keyWord)) {
-                            found = true;
+                            hasIngredient = true;
                             break;
                         }
                     }
+                    if (!hasIngredient) {
+                        valid = false;
+                        break;
+                    }
                 }
-            }
-            if (found) {
+            } 
+            if (valid) {
                 matchRecipes.push(recipe);
             }
         }
-        return matchRecipes;
-    }
-    return recipes;
+        return matchRecipes; 
+    }   
+    return recipes;     
 }
 
 
