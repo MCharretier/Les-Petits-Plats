@@ -19,29 +19,16 @@ const getRecipesBySearch = () => {
 
         recipes.forEach( recipe => {
 
-            keyWords.some( keyWord => {
-
-                if ( recipe.name.toLowerCase().includes(keyWord) ) {
-                    matchRecipes.add(recipe)
-                    return true
-                } 
-                else if ( recipe.description.toLowerCase().includes(keyWord) ) {
-                    matchRecipes.add(recipe)
-                    return true
-                } 
-                else {
-                    return recipe.ingredients.some( ingredient => {
-
-                        if ( ingredient.ingredient.toLowerCase().includes(keyWord) ) {
-                            matchRecipes.add(recipe)
-                            return true
-                        }
-                        return false
+            const valid = keyWords.every( keyWord => {
+                return recipe.name.toLowerCase().includes(keyWord)
+                    || recipe.description.toLowerCase().includes(keyWord)
+                    || recipe.ingredients.some( ingredient => {
+                        return ingredient.ingredient.toLowerCase().includes(keyWord)
                     })
-                }
             })
-        })
 
+            if (valid) matchRecipes.add(recipe)
+        })
         return [...matchRecipes]
     }
 
