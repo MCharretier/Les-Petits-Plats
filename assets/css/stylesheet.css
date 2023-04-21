@@ -1,5 +1,5 @@
-@import url(./fonts.css);
-@import url(./reset.css);
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap');
+@import url('./reset.css');
 
 body {
     padding: 0 100px;
@@ -296,4 +296,133 @@ label img {
     font-size: 12px;
     line-height: 100%;
     font-weight: 400;
+}
+
+@media (max-width: 1439px) {
+
+    body {
+        padding: 0 40px;
+    }
+
+    .recipes { 
+        gap: 25px;
+        padding-bottom: 40px;
+    }
+}
+
+@media (max-width: 864px) {
+
+    body {
+        padding: 0 20px;
+    }
+
+    header {
+        padding-top: 30px;
+        margin-bottom: 20px;
+    }
+    
+    header h1 img {
+        height: 60px;
+    }
+
+    form {
+        margin: 20px 0;
+    }
+    
+    #search {
+        padding: 15px;
+        font-size: 16px;
+        line-height: 19px;
+    }
+    
+    label {
+        right: 15px;
+    }
+    
+    label img {
+        width: 16px;
+        height: 16px;
+    }
+
+    #filters {
+        margin: 20px 0;
+    }
+    
+    #filters .categories {
+        gap: 15px;
+    }
+    
+    .tags {
+        gap: 10px;
+        margin: 20px 0 15px 0;
+    }
+    
+    .tag {
+        padding: 10px 40px 10px 10px;
+    }
+    
+    .tag button {
+        right: 10px;
+    }
+    
+    #filters .categories .dropdown button.dropdown-toggle {
+        font-size: 16px;
+        padding: 15px;
+        height: 55px;
+        max-height: 55px;
+        width: 140px;
+    }
+    
+    .dropdown-toggle::after {
+        right: 15px;
+    }
+    
+    .dropdown-menu {
+        padding: 15px;
+    }
+    
+    .dropdown-menu form {
+        margin-bottom: 20px;
+    }
+    
+    .dropdown-menu form input[type=search] {
+        font-size: 18px;
+        line-height: 22px;
+    }
+    
+    .dropdown-menu .dropdown-menu-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px 15px;
+        max-height: 250px;
+    }
+    
+    .dropdown-menu .dropdown-menu-list .filter {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .recipes { 
+        gap: 20px;
+        padding-bottom: 20px;
+    }
+
+    .recipe .content {
+        padding: 15px 15px 30px 15px;
+    }
+}
+
+@media (max-width: 421px) {
+
+    .recipes {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .dropdown-menu .dropdown-menu-list {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .recipe .content .bottom {
+        flex-direction: column;
+        gap: 20px;
+    }
 }
